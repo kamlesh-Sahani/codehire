@@ -2,8 +2,6 @@
 # **CodeHire**  
 _Revolutionizing Technical Interviews with Real-Time Code Assessment and AI Integration._  
 
-![CodeHire Banner](https://via.placeholder.com/800x200.png?text=CodeHire)  
-
 ---
 
 ## 🚀 **About CodeHire**  
@@ -23,7 +21,7 @@ _Revolutionizing Technical Interviews with Real-Time Code Assessment and AI Inte
 ---
 
 ## 📸 **Preview**  
-![CodeHire Preview](https://via.placeholder.com/800x400.png?text=App+Preview)  
+![codehire](https://github.com/user-attachments/assets/b4ef5972-7329-4d27-9b78-a8649474000a)
 
 ---
 
