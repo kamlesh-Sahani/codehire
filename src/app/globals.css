@@ -7,5 +7,6 @@ body {
   color: #fff;
   background: #0D0c16;
   font-family: "Poppins", serif;
+  scroll-behavior: smooth;
 }
         /* background2:"#140E18", */

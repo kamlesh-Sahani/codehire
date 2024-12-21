@@ -1,96 +1,99 @@
+# **CodeHire**
 
-# **CodeHire**  
-_Revolutionizing Technical Interviews with Real-Time Code Assessment and AI Integration._  
-
----
-
-## 🚀 **About CodeHire**  
-**CodeHire** is a real-time coding interview platform designed to simplify and enhance the hiring process for tech companies. With advanced AI integration, cheat-proof monitoring, and seamless collaboration, it ensures fair and efficient evaluation of candidates' coding skills.
+_Revolutionizing Technical Interviews with Real-Time Code Assessment and AI Integration._
 
 ---
 
-## ✨ **Key Features**  
-- **Real-Time Code Collaboration**: Work with candidates on a shared code editor during interviews.  
-- **AI-Powered Code Insights**: Get instant feedback on code quality and performance.  
-- **Cheat-Proof Environment**: Advanced monitoring tools to prevent unfair practices.  
-- **Built-In Test Cases**: Auto-evaluate code submissions with pre-defined test cases.  
-- **Video and Audio Integration**: Conduct live interviews alongside coding challenges.  
-- **Activity Logs**: Track candidate activity, including typing patterns and tab switches.  
-- **Customizable Questions**: Design challenges tailored to your hiring needs.  
+## **🚀 About CodeHire**
+
+**CodeHire** is a powerful interview platform tailored for technical hiring. Designed with advanced tools like real-time collaboration, AI-driven feedback, and anti-cheating measures, it ensures fair and efficient evaluation of candidates.
 
 ---
 
-## 📸 **Preview**  
-![codehire](https://github.com/user-attachments/assets/b4ef5972-7329-4d27-9b78-a8649474000a)
+## **✨ Key Features**
+
+| **Feature**               | **Description**                                                        |
+|----------------------------|------------------------------------------------------------------------|
+| 🖊️ **Real-Time Collaboration** | Conduct live coding interviews with a shared, interactive editor.     |
+| 🤖 **AI-Powered Feedback**      | Gain instant insights into code quality, logic, and performance.     |
+| 🛡️ **Cheat-Proof Environment**  | Advanced monitoring tools to prevent unfair practices during interviews. |
+| ✅ **Built-In Test Cases**       | Automate code evaluation with predefined test cases for accuracy.   |
+| 🎥 **Video & Audio Integration**| Conduct live interviews with seamless communication tools.          |
+| 📊 **Activity Logs**            | Track candidate activity, including typing patterns and tab switches. |
+| ✏️ **Customizable Questions**   | Design coding challenges tailored to specific hiring needs.         |
 
 ---
 
-## 🛠️ **Tech Stack**  
-- **Frontend and Backend**: Nextjs,server-side ,server action , Tailwind CSS  
+## **🛠️ Tech Stack**
+
+- **Frontend & Backend**: Next.js, Tailwind CSS  
 - **Database**: MongoDB  
 - **Authentication**: JWT  
-- **AI Integration**: Gemini APIs  
+- **AI Integration**: OpenAI APIs  
 
 ---
 
-## 📦 **Setup and Installation**  
+## **📦 Setup and Installation**
 
-1. Clone the repository:  
+Follow these steps to set up the project locally:
+
+1. **Clone the Repository**:  
    ```bash
    git clone https://github.com/kamlesh-Sahani/codehire.git
-   ```  
-
-2. Navigate to the project folder:  
-   ```bash
    cd codehire
-   ```  
+   ```
 
-3. Install dependencies:  
+2. **Install Dependencies**:  
    ```bash
    npm install
-   ```  
+   ```
 
-4. Set up environment variables in a `.env` file:  
+3. **Set Up Environment Variables**:  
+   Create a `.env` file in the root directory and add the following:  
    ```env
    MONGO_URI=<Your MongoDB URI>
    JWT_SECRET=<Your JWT Secret>
    OPENAI_API_KEY=<Your OpenAI API Key>
-   ```  
+   ```
 
-5. Run the development server:  
+4. **Run the Development Server**:  
    ```bash
    npm run dev
-   ```  
+   ```
 
-6. Access the app in your browser:  
-   ```text
-   http://localhost:3000
-   ```  
-
----
-
-
+5. **Build for Production**:  
+   ```bash
+   npm run build
+   npm start
+   ```
 
 ---
 
-## 📋 **Contributing**  
-We welcome contributions! Feel free to submit a pull request or raise an issue for suggestions or bugs.  
+## **📋 Contributing**
+
+We welcome contributions! If you’d like to improve **CodeHire**, feel free to:  
+
+- Submit a pull request.  
+- Open an issue to suggest a feature or report a bug.  
 
 ---
 
-## 📞 **Contact**  
-**Kamlesh Sahani**  
-📧 Email: [kamleshbca2005@gmail.com](mailto:kamleshbca2005@gmail.com)  
-📱 Phone: +91 9667760692  
+## **📞 Contact**
 
-GitHub: [kamlesh-sahani](https://github.com/kamlesh-Sahani)  
-LinkedIn: [Kamlesh Sahani](https://www.linkedin.com/in/kamlesh-sahani)  
+**Project Maintainer**: Kamlesh Sahani  
 
----
-
-## 📜 **License**  
-This project is licensed under the MIT License.  
+- **Email**: [kamleshbca2005@gmail.com](mailto:kamleshbca2005@gmail.com)  
+- **Phone**: +91 9667760692  
+- **GitHub**: [kamlesh-sahani](https://github.com/kamlesh-sahani)  
+- **LinkedIn**: [Kamlesh Sahani](https://linkedin.com/in/kamlesh-sahani)  
 
 ---
 
-**CodeHire** – _Your ultimate solution for efficient and fair technical interviews!_
+## **📜 License**
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+**CodeHire** – Empowering companies to conduct efficient and fair technical interviews.
+

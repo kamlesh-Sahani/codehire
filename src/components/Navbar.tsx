@@ -11,8 +11,8 @@ const Navbar = () => {
 
 
       <div className="flex justify-center items-center gap-5 ">
-        <Link href="#feature" className="font-medium text-[13px]">FEATURE</Link>
-        <Link href={"#pricing"} className="font-medium text-[13px]">PRICING</Link>
+        <Link href="/#features" className="font-medium text-[13px]">FEATURE</Link>
+        <Link href={"/#pricing"} className="font-medium text-[13px]">PRICING</Link>
       </div>
 
       <div className="flex justify-center items-center gap-5">
