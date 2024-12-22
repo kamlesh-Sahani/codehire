@@ -3,6 +3,7 @@ import aiImage from "@/assets/ai.png"
 import { Activity, Brain, GlobeLock } from "lucide-react";
 import FeatureSection from "@/components/Feature";
 import PricingSection from "@/components/Pricing";
+import Link from "next/link";
 export default function Home() {
   return (
     <div className="flex flex-col gap-20 items-center w-full h-full  justify-center   ">
@@ -21,7 +22,9 @@ export default function Home() {
             </div>
 
 
-            <button className="bg-white text-black outline-none rounded-md rounded-tr-2xl  w-[200px] h-[40px] cursor-pointer hover:bg-[#eee] font-medium">GET STARTED NOW</button>
+
+<Link href={"/interview"}>  <button className="bg-white text-black outline-none rounded-md rounded-tr-2xl  w-[200px] h-[40px] cursor-pointer hover:bg-[#eee] font-medium">GET STARTED NOW</button></Link>
+          
           </div>
 
           <Image src={aiImage} alt="aiImage" className="max-lg:w-[200px] " />
