@@ -4,14 +4,14 @@ import { LogOut, Send, WrapText } from "lucide-react";
 import { FormEvent, useState,useContext } from "react";
 
 const LeftPanel = () => {
-  const [messages, setMessages] = useState<any>([]);
+  const [messages, setMessages] = useState<Array<string>>([]);
   const [message, setMessage] = useState<string>("");
   const {sideBar,setSideBar} = useContext(EditorContext);
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (message.trim() === "") return;
-    setMessages((prev: any) => [...prev, message]);
+    setMessages((prev) => [...prev, message]);
     setMessage("");
   };
   return (

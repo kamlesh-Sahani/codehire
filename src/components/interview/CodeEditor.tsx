@@ -4,7 +4,7 @@ import Editor from "@monaco-editor/react";
 import { useContext, useRef, useState } from "react";
 
 const CodeEditor = () => {
-    const {language,setLanguage,defaultCode,setDefaultCode} = useContext(EditorContext)
+    const {language,defaultCode} = useContext(EditorContext)
     const [codeData,setCodeData] = useState<string|undefined>("");
     const editorRef = useRef(null);
 
