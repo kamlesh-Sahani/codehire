@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import LeftPanel from '@/components/interview/LeftPanel';
 import CenterPanel from '@/components/interview/CenterPanel';

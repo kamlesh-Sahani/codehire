@@ -90,7 +90,7 @@ const LeftPanel = () => {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
-              <button className="bg-white text-black rounded-md rounded-tr-2Xl w-[130px] font-medium h-[40px] flex gap-1 justify-center items-center cursor-pointer">
+              <button className="bg-white text-black rounded-md rounded-tr-2xl w-[130px] font-medium h-[40px] flex gap-1 justify-center items-center cursor-pointer">
                 <Send />
                 <p>SEND</p>
               </button>
