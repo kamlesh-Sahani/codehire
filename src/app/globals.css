@@ -4,9 +4,8 @@
 @tailwind utilities;
 
 body {
-  color: #fff;
-  background: #0D0c16;
+  color: #000;
+  background: #000;
   font-family: "Poppins", serif;
   scroll-behavior: smooth;
 }
-        /* background2:"#140E18", */

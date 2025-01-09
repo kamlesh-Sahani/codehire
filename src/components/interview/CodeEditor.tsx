@@ -12,6 +12,7 @@ const CodeEditor = () => {
         editorRef.current = editor;
         editor.focus();
     }
+    console.log("monaco editor")
   return (
     <div className="w-full h-full ">
       <Editor
@@ -23,6 +24,7 @@ const CodeEditor = () => {
         value={codeData}
         onChange={(value)=>setCodeData(value)}
         onMount={editorMount}
+        loading={<h1>Loading................</h1>}
       />
     </div>
   );

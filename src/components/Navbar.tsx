@@ -1,26 +1,50 @@
-import { BrainCircuit } from "lucide-react"
-import Link from "next/link"
+"use client";
+import { useState, useEffect } from "react";
+import { Gitlab } from "lucide-react";
+import Link from "next/link";
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="flex justify-between px-10 py-4  border-b-2 border-[#4b4b4b] text-[#868686]">
-      <div className="flex  justify-center items-center gap-2">
-      <BrainCircuit color="#ae6eff" className="text-2xl" />
-      <h1 className="font-semibold text-xl text-white">CodeHire</h1>
-      </div>
-
-
-      <div className="flex justify-center items-center gap-5 ">
-        <Link href="/#features" className="font-medium text-[13px]">FEATURE</Link>
-        <Link href={"/#pricing"} className="font-medium text-[13px]">PRICING</Link>
-      </div>
-
+    <div
+      className={`flex justify-between items-center px-5 h-[60px] md:w-[75%] mx-auto rounded-2xl fixed top-4 z-50 left-1/2 -translate-x-1/2 transition-all duration-300 ${
+        scrolled
+          ? "bg-black/20 backdrop-blur-lg shadow shadow-[#333333]"
+          : "bg-transparent"
+      }`}
+    >
+      <Link href={"/"}>
+        <div className="flex justify-center items-center gap-2">
+          <div className="w-[40px] h-[40px] rounded-full bg-mainColor flex justify-center items-center">
+            <Gitlab className="text-2xl" />
+          </div>
+          <h1 className="font-semibold text-[25px]  bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
+            CodeHire
+          </h1>
+        </div>
+      </Link>
       <div className="flex justify-center items-center gap-5">
-      <Link href="/register" className="font-medium text-[13px]">NEW ACCOUNT</Link>
-      <Link href={"/login"} className="font-medium text-[13px]"><button className="bg-[#fff] w-[100px] h-[30px] text-black rounded-md rounded-tr-2xl">SIGN IN</button> </Link>
+        <Link href={"/login"} className="font-medium text-[13px]">
+          <button
+            className="bg-mainColor text-black h-[40px] w-[140px] text-[17px] rounded-xl font-semibold flex justify-center items-center gap-3 hover:shadow-mainColor/50 transition-all hover:shadow-lg"
+            aria-label="Login to CodeHire"
+          >
+            <p>Login</p>
+          </button>
+        </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

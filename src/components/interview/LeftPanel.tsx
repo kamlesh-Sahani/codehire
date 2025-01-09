@@ -1,12 +1,14 @@
 "use client";
 import { EditorContext } from "@/context/EditorContext";
-import { LogOut, Send, WrapText } from "lucide-react";
+import { LogOut, Send,WrapText } from "lucide-react";
 import { FormEvent, useState,useContext } from "react";
 
 const LeftPanel = () => {
+  const {sideBar,setSideBar} = useContext(EditorContext);
+  
   const [messages, setMessages] = useState<Array<string>>([]);
   const [message, setMessage] = useState<string>("");
-  const {sideBar,setSideBar} = useContext(EditorContext);
+
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
