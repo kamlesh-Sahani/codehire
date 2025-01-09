@@ -1,6 +1,6 @@
 "use client";
 import { EditorContext } from "@/context/EditorContext";
-import Editor, { Monaco } from "@monaco-editor/react";
+import Editor from "@monaco-editor/react";
 import { useContext, useRef, useState } from "react";
 
 const CodeEditor = () => {
@@ -8,7 +8,7 @@ const CodeEditor = () => {
     const [codeData,setCodeData] = useState<string|undefined>("");
     const editorRef = useRef(null);
 
-    const editorMount = (editor:any, monaco: Monaco)=>{
+    const editorMount = (editor:any)=>{
         editorRef.current = editor;
         editor.focus();
     }

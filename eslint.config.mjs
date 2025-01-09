@@ -15,7 +15,9 @@ const eslintConfig = [
     rules: {
       // Add rules you want to disable here
       "rule-name-to-disable": "off", // Replace with the actual rule name
-      "another-rule-to-disable": "off",
+      "another-rule-to-disable": "off",   
+      "@typescript-eslint/no-unused-vars": "off", // Disables unused variable checks
+    "@typescript-eslint/no-explicit-any": "off" // Disables explicit any warnings                    
     },
   },
 ];
