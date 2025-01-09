@@ -1,11 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { registerAction } from "../action/auth.action";
 import Link from "next/link";
 
 export default function LoginPage() {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const [guestLoading, setGuestLoading] = useState<boolean>(false);
+  useEffect(()=>{
+    setSubmitLoading(false);
+    setGuestLoading(false);
+  },[])
   return (
     <div className="flex justify-center items-center">
       <form
