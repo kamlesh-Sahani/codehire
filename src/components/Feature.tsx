@@ -46,19 +46,24 @@ const features = [
 
 const FeatureSection = () => {
   return (
-    <section className="py-10 mt-30" id="features">
-      <div className="text-center mb-12">
+    <section className="py-10 mt-30  flex flex-col gap-3 justify-center items-center w-full" id="features">
+      <div className="text-center">
 
         <h1 className="text-3xl font-semibold  mx-auto text-center mt-6 relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
         Explore the powerful features that make CodeHire the ideal <br />  platform for conducting  <Cover className="text-mainColor"><span className="text-mainColor">coding interviews</span> </Cover>.
           </h1>
       </div>
 
-      <InfiniteMovingCards
+     <div className="w-full  overflow-x-auto">
+     <InfiniteMovingCards
           items={features}
           direction="right"
           speed="fast"                                            
         />
+     </div>
+     
+    
+    
 
     </section>
   );
