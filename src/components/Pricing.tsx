@@ -148,7 +148,7 @@ export default function Example() {
                   href={tier.href}
                   aria-describedby={tier.id}
                   className={classNames(
-                    "bg-indigo-500 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline-indigo-500",
+                    "bg-mainColor text-white shadow-sm hover:bg-mainColor/20 focus-visible:outline-mainColor",
                     "mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10"
                   )}
                 >

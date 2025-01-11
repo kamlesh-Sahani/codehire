@@ -4,20 +4,19 @@ import CodeEditor from "./CodeEditor";
 import { useContext } from "react";
 import { EditorContext } from "@/context/EditorContext";
 
-const CenterPanel = () => {
-  const { language, setLanguage,sideBar } = useContext(EditorContext);
+const EditorContainer = () => {
+  const { language, setLanguage} = useContext(EditorContext);
   const [langaugeBox, setLanguageBox] = useState<boolean>(false);
-
   const languageHandler = (lan: string) => {
     setLanguage(lan);
     setLanguageBox(false);
   };
   return (
-    <main className={` p-4 ${sideBar?"w-[70%]" :"w-full"}`}>
-      <div className="h-[60%] flex flex-col gap-4     ">
+    <main className={` p-4 w-full h-full grid grid-cols-3 bg-[#1E1E1E] rounded`}>
+      <div className="flex flex-col gap-4  col-span-2 border-r-2 border-[#424242] pr-7">
         <div className="flex justify-between items-center">
           <div className="flex gap-2 justify-center items-center relative">
-            <p className="font-medium text-[#3b3b3b]">Language :</p>
+            <p className="font-medium text-white">Language :</p>
             <button
               className="py-2 px-6 bg-[#2b2b2b] rounded-md font-mono"
               onClick={() => setLanguageBox((prev) => !prev)}
@@ -55,11 +54,11 @@ const CenterPanel = () => {
             )}
           </div>
 
-          <button className="bg-white text-black font-bold  px-4 py-2  rounded">
+          <button className="bg-mainColor text-black font-bold  px-4 py-2  rounded cursor-pointer">
             Run Code
           </button>
         </div>
-        <div className="border border-gray-300 rounded overflow-hidden h-[90%] w-full">
+        <div className=" rounded overflow-hidden h-[90%] w-full ">
           {/* <textarea
             className="w-full h-full p-4 font-mono text-sm bg-black"
             placeholder="Write your code here..."
@@ -69,19 +68,13 @@ const CenterPanel = () => {
         </div>
       </div>
 
-      <div className=" flex  h-[40%] p-3 w-full">
-        <div className="flex flex-col gap-3 w-[50%]">
-          <h1 className="font-semibold text-[#4d4d4d]">Output</h1>
-          <div className="h-full font-mono"> true </div>
-        </div>
-
-        <div className="flex flex-col gap-3 w-[50%]">
-          <h1 className="font-semibold text-[#4d4d4d]">Performance</h1>
-          <div className="h-full font-mono"> true </div>
-        </div>
+      <div className="  h-full p-3 w-full flex flex-col gap-2">
+    
+      <h1 className="font-semibold text-white text-right">Output</h1>
+      <div className=" flex-1"></div>
       </div>
     </main>
   );
 };
 
-export default CenterPanel;
+export default EditorContainer;
