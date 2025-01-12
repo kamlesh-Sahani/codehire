@@ -1,15 +1,42 @@
 "use client";
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/util";
 import { Cover } from "@/components/ui/cover";
 import Link from "next/link";
+import { registerAction } from "../action/auth.action";
+export interface registerDataType{
+  name:string
+  email:string;
+  password:string;
+}
+
 export default function SignupFormDemo() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Form submitted");
-  };
+  const [registerData,setRegisterData] = useState<registerDataType>({
+    name:"",
+    email:"",
+    password:""
+  })
+  const valueHandler  = (e:ChangeEvent<HTMLInputElement>)=>{
+    const {name,value} = e.target;
+    setRegisterData((prev)=>({
+      ...prev,
+      [name]:value
+    }))
+  }
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
+    try {
+      e.preventDefault();
+      console.log(registerData);
+      const res = await registerAction(registerData);
+      console.log(res);
+
+    } catch (error) {
+      console.log(error,"err")
+    }
+
+  }
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input   mt-20 ">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200"></h2>
@@ -20,13 +47,18 @@ export default function SignupFormDemo() {
         </span>
       </h1>
       <form className="my-8" onSubmit={handleSubmit}>
+      <LabelInputContainer className="mb-4">
+          <Label htmlFor="name">Name</Label>
+          <Input id="name" onChange={valueHandler} name="name" placeholder="kamlesh" type="text"/>
+        </LabelInputContainer>
+
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
+          <Input id="email" onChange={valueHandler} name="email" placeholder="kamleshbca2005@gmail.com" type="email" />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" />
+          <Input id="password" onChange={valueHandler} name="password" placeholder="••••••••" type="password" />
         </LabelInputContainer>
         <button
           className="bg-gradient-to-br relative group/btn  block bg-mainColor w-full text-black font-bold rounded-md h-10  shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"

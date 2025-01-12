@@ -1,13 +1,31 @@
 "use client";
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/util";
 import { Cover } from "@/components/ui/cover";
 import Link from "next/link";
+
+
+interface LoginDataType{
+  email:string;
+  password:string;
+}
 export default function LoginPage() {
+  const [loginData,setLoginData] = useState<LoginDataType>({
+    email:"",
+    password:""
+  })
+  const valueHandler  = (e:ChangeEvent<HTMLInputElement>)=>{
+    const {name,value} = e.target;
+    setLoginData((prev)=>({
+      ...prev,
+      [name]:value
+    }))
+  }
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(loginData);
     console.log("Form submitted");
   };
   return (
@@ -20,13 +38,15 @@ export default function LoginPage() {
         </span>
       </h1>
       <form className="my-8" onSubmit={handleSubmit}>
+     
+
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
+          <Input id="email" onChange={valueHandler} name="email" placeholder="kamleshbca2005@gmail.com" type="email" />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" />
+          <Input id="password" onChange={valueHandler} name="password" placeholder="••••••••" type="password" />
         </LabelInputContainer>
         <button
           className="bg-gradient-to-br relative group/btn  block font-bold bg-mainColor w-full text-black rounded-md h-10  shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
@@ -38,7 +58,16 @@ export default function LoginPage() {
 
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
       </form>
-      <Link href={"/register"} className="text-white text-center w-full  block italic">Register new account<span className="text-mainColor font-semibold underline"> Register</span></Link>
+      <Link
+        href={"/register"}
+        className="text-white text-center w-full  block italic"
+      >
+        Register new account
+        <span className="text-mainColor font-semibold underline">
+          {" "}
+          Register
+        </span>
+      </Link>
     </div>
   );
 }

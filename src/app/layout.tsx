@@ -34,18 +34,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "CodeHire - Empowering Tech Talent",
     description: "The ultimate platform for technical interviews and skill evaluation.",
-    url: "https://codehire-peach.vercel.app", // Your website URL
+    url: `${process.env.BASE_URL}`, // Your website URL
     siteName: "CodeHire",
-    images: [
-      {
-        url: "https://codehire-peach.vercel.app/og-image.png", // Replace with your OG image URL
-        width: 1200,
-        height: 630,
-        alt: "CodeHire - Empowering Tech Talent",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
   },
 
   // Twitter Card Meta Tags
@@ -55,20 +45,15 @@ export const metadata: Metadata = {
     creator: "@kamlesh_sahani", // Your personal Twitter handle
     title: "CodeHire - Empowering Tech Talent",
     description: "The ultimate platform for technical interviews and skill evaluation.",
-    images: ["https://codehire-peach.vercel.app/og-image.png"], // Replace with your OG image URL
   },
 
-  // Additional meta tags
-  themeColor: "#1f2937", // Primary brand color
-  colorScheme: "dark", // Specify dark mode preference
-  robots: "index, follow", // Allow search engines to index the page
   alternates: {
-    canonical: "https://codehire-peach.vercel.app",
+    canonical:`${process.env.BASE_URL}`,
   },
 
   // Icons
   icons: {
-    icon: "/favicon.ico",
+    icon: "/og-image.png",
     apple: "/og-image.png",
     shortcut: "/favicon-192x192.png",
   },
@@ -80,13 +65,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="flex flex-col gap-10 h-full">
           <Navbar />
-          <div>{children}</div>
+          <div className="flex-1">{children}</div>
           <Footer />
         </div>
       </body>
