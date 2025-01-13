@@ -5,9 +5,12 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/util";
 import { Cover } from "@/components/ui/cover";
 import Link from "next/link";
+import { loginAction } from "../action/auth.action";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 
-interface LoginDataType{
+export interface LoginDataType{
   email:string;
   password:string;
 }
@@ -15,7 +18,12 @@ export default function LoginPage() {
   const [loginData,setLoginData] = useState<LoginDataType>({
     email:"",
     password:""
-  })
+  });
+
+  const [loading,setLoading] = useState<boolean>(false);
+  const [guestLoading,setGuestLoading] = useState<boolean>(false)
+  const router = useRouter();
+
   const valueHandler  = (e:ChangeEvent<HTMLInputElement>)=>{
     const {name,value} = e.target;
     setLoginData((prev)=>({
@@ -23,11 +31,54 @@ export default function LoginPage() {
       [name]:value
     }))
   }
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(loginData);
-    console.log("Form submitted");
+    try {
+      setLoading(true);
+      console.log(loginData);
+      const res = await loginAction(loginData);
+      console.log(res);
+      if(res.success){
+        toast.success(res.message);
+        setLoginData({
+          email:"",
+    password:""
+        })
+        router.push("/interview")
+
+      }else{
+        toast.error(res.message);
+      }
+    } catch (error) {
+      toast.error(error.message|| "something went wrong");
+    }finally{
+      setLoading(false)
+    }
   };
+
+  const guestHandler = async() => {
+    try {
+      setGuestLoading(true);
+      const guestLoginData ={
+        email:process.env.NEXT_PUBLIC_GUEST_EMAIL,
+        password:process.env.NEXT_PUBLIC_GUEST_PASSWORD
+      }
+      console.log(guestLoginData,"guest")
+      const res = await loginAction(guestLoginData);
+      if(res.success){
+        toast.success(res.message);
+        router.push("/interview")
+
+      }else{
+        toast.error(res.message);
+      }
+    } catch (error) {
+      toast.error(error.message|| "something went wrong");
+    }finally{
+      setGuestLoading(false)
+    }
+  };
+
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input   mt-20 ">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200"></h2>
@@ -52,9 +103,25 @@ export default function LoginPage() {
           className="bg-gradient-to-br relative group/btn  block font-bold bg-mainColor w-full text-black rounded-md h-10  shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
           type="submit"
         >
-          Login &rarr;
+          {
+            loading?"Loading..":"Login"
+          }
+           &rarr;
           <BottomGradient />
         </button>
+        
+        <button
+          className="mt-5 bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+          type="button"
+          onClick={guestHandler}
+        >
+          {
+            guestLoading ? "अतिथि देवो भवः":"GUEST"
+          }
+          &rarr;
+          <BottomGradient />
+        </button>
+
 
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
       </form>
