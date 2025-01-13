@@ -58,7 +58,6 @@ export const metadata: Metadata = {
     shortcut: "/favicon-192x192.png",
   },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
