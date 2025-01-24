@@ -1,8 +1,9 @@
 import dbConnect from "@/lib/dbConnect";
 import { NextRequest, NextResponse } from "next/server";
-import {Server} from "socket.io"
 export async function GET(req:NextRequest,res:NextResponse){
     try {
+
+        await dbConnect();
 
         // if(!res.socket.server.io){
         //     console.log("initialing the socket server....");
