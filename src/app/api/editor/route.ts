@@ -1,12 +1,10 @@
 import dbConnect from "@/lib/dbConnect";
 import { NextRequest, NextResponse } from "next/server";
 import {Server} from "socket.io"
-export async function Handler(req:NextRequest,res:NextResponse){
+export async function GET(req:NextRequest,res:NextResponse){
     try {
 
         if(!res.socket.server.io){
-        
-
             console.log("initialing the socket server....");
             const io = new Server(res.socket.server,{
                 path:"/api/editor",
