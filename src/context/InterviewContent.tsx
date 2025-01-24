@@ -10,7 +10,7 @@ const InterviewContext = createContext<InterviewContextType>({
 users:[],
 setUsers:()=>{}
 });
-const interviewContentProvider = ({children}:{children:React.ReactNode}) => {
+const InterviewContentProvider = ({children}:{children:React.ReactNode}) => {
     const [users,setUsers] = useState([])
   return (
     <InterviewContext.Provider value={{users,setUsers}}>
@@ -19,4 +19,4 @@ const interviewContentProvider = ({children}:{children:React.ReactNode}) => {
   )
 }
 
-export default interviewContentProvider
+export default InterviewContentProvider
