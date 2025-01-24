@@ -4,25 +4,25 @@ import {Server} from "socket.io"
 export async function GET(req:NextRequest,res:NextResponse){
     try {
 
-        if(!res.socket.server.io){
-            console.log("initialing the socket server....");
-            const io = new Server(res.socket.server,{
-                path:"/api/editor",
-                origin:"*"
-            })
+        // if(!res.socket.server.io){
+        //     console.log("initialing the socket server....");
+        //     const io = new Server(res.socket.server,{
+        //         path:"/api/editor",
+        //         origin:"*"
+        //     })
 
 
-            await dbConnect();
+        //     await dbConnect();
 
 
 
-        io.on("connection",(socket)=>{
-            console.log("user is connected");
+        // io.on("connection",(socket)=>{
+        //     console.log("user is connected");
 
-        })
+        // })
 
 
-        }
+        // }
         
     } catch (error) {
         return NextResponse.json({
