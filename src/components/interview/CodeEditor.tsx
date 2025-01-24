@@ -2,17 +2,14 @@
 import { EditorContext } from "@/context/EditorContext";
 import Editor from "@monaco-editor/react";
 import { useContext, useRef, useState } from "react";
-
+import Loader from "../Loader";
 const CodeEditor = () => {
-    const {language,defaultCode} = useContext(EditorContext)
-    const [codeData,setCodeData] = useState<string|undefined>("");
+    const {language,defaultCode,setCodeContent,codeContent} = useContext(EditorContext)
     const editorRef = useRef(null);
-
     const editorMount = (editor:any)=>{
         editorRef.current = editor;
         editor.focus();
     }
-    console.log("monaco editor")
   return (
     <div className="w-full h-full ">
       <Editor
@@ -21,10 +18,10 @@ const CodeEditor = () => {
         width={"100%"}
         defaultLanguage={language}
         defaultValue={defaultCode}
-        value={codeData}
-        onChange={(value)=>setCodeData(value)}
+        value={codeContent}
+        onChange={(value)=>setCodeContent(value)}
         onMount={editorMount}
-        loading={<h1>Loading................</h1>}
+        loading={<Loader />}
       />
     </div>
   );

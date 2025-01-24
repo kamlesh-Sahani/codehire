@@ -11,16 +11,17 @@ interface EditorContextType {
   defaultCode: string;
   setLanguage: Dispatch<SetStateAction<string>>;
   setDefaultCode: Dispatch<SetStateAction<string>>;
-  sideBar:boolean;
-  setSideBar:Dispatch<SetStateAction<boolean>>;
+  codeContent:string;
+  setCodeContent:Dispatch<SetStateAction<string>>;
+
 }
 export const EditorContext = createContext<EditorContextType>({
   language: "javascript",
   defaultCode: "console.log('hello world')",
   setDefaultCode: () => {},
   setLanguage: () => {},
-  setSideBar:()=>{},
-  sideBar:true
+  codeContent:"",
+  setCodeContent:()=>{}
 });
 
 const EditorProvider = ({ children }: { children: ReactNode }) => {
@@ -28,10 +29,10 @@ const EditorProvider = ({ children }: { children: ReactNode }) => {
   const [defaultCode, setDefaultCode] = useState<string>(
     "console.log('hello world')"
   );
-  const [sideBar,setSideBar] = useState<boolean>(true);
+  const [codeContent,setCodeContent] = useState<string>("");
   return (
     <EditorContext.Provider
-      value={{ language, defaultCode, setLanguage, setDefaultCode,sideBar,setSideBar }}
+      value={{ language, defaultCode, setLanguage, setDefaultCode,codeContent,setCodeContent }}
     >
       {children}
     </EditorContext.Provider>

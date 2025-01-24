@@ -1,13 +1,19 @@
 "use client";
+import Candidates from "@/components/interview/Candidates";
 import Canvas from "@/components/interview/Canvas";
 import CodeEditor from "@/components/interview/CodeEditor";
 import EditorContainer from "@/components/interview/EditorContainer";
+import Modal from "@/components/interview/Model";
 import Performance from "@/components/interview/Performance";
 import React, { useState } from "react";
 function InterviewPage() {
   const [screenType, setScreenType] = useState<
     "canvas" | "editor"  | "performance"
-  >("editor");
+  >("canvas");
+
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   return (
     <div className="flex flex-col w-full justify-center items-center px-6 pt-20 gap-2  text-white h-screen">
       <div className="flex justify-center  items-center">
@@ -30,6 +36,8 @@ function InterviewPage() {
         }
         
       </div>
+
+      <Modal isOpen={isModalOpen} closeModal={closeModal} />
     </div>
   );
 }

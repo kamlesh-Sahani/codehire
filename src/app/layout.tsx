@@ -3,7 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import {Toaster} from "react-hot-toast"
+import { Toaster } from "react-hot-toast";
+import Provider from "@/components/ui/ThemeProvider";
+import AuthProvider from "@/context/authContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -17,7 +19,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   // Basic SEO
   title: "CodeHire - Empowering Tech Talent",
-  description: "CodeHire: The ultimate platform for technical interviews and skill evaluation.",
+  description:
+    "CodeHire: The ultimate platform for technical interviews and skill evaluation.",
 
   // General
   applicationName: "CodeHire",
@@ -28,12 +31,16 @@ export const metadata: Metadata = {
     "developer hiring",
     "programming challenges",
   ],
-  authors: { name: "Kamlesh Sahani", url: "https://www.linkedin.com/in/kamlesh-sahani/" },
+  authors: {
+    name: "Kamlesh Sahani",
+    url: "https://www.linkedin.com/in/kamlesh-sahani/",
+  },
 
   // Open Graph (OG) Meta Tags for social sharing
   openGraph: {
     title: "CodeHire - Empowering Tech Talent",
-    description: "The ultimate platform for technical interviews and skill evaluation.",
+    description:
+      "The ultimate platform for technical interviews and skill evaluation.",
     url: `${process.env.BASE_URL}`, // Your website URL
     siteName: "CodeHire",
   },
@@ -44,11 +51,12 @@ export const metadata: Metadata = {
     site: "@codehire", // Replace with your Twitter handle
     creator: "@kamlesh_sahani", // Your personal Twitter handle
     title: "CodeHire - Empowering Tech Talent",
-    description: "The ultimate platform for technical interviews and skill evaluation.",
+    description:
+      "The ultimate platform for technical interviews and skill evaluation.",
   },
 
   alternates: {
-    canonical:`${process.env.BASE_URL}`,
+    canonical: `${process.env.BASE_URL}`,
   },
 
   // Icons
@@ -64,17 +72,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex flex-col gap-10 h-full">
-          <Navbar />
-          <div className="flex-1">{children}</div>
-          <Footer />
-        </div>
-        <Toaster />
+        <Provider
+        >
+          <AuthProvider >
+          <div className="flex flex-col justify-between gap-10  min-h-screen">
+            <Navbar></Navbar>
+            <div className="flex-1">{children}</div>
+            <Footer />
+          </div>
+          <Toaster></Toaster>
+          </AuthProvider>
+          
+        </Provider>
       </body>
     </html>
   );
