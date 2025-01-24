@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import userModel from "@/models/user.model";
 import dbConnect from "@/lib/dbConnect";
-export async function GET(req:NextRequest,res:NextResponse){
+export async function GET(req:NextRequest,res:NextResponse<any>){
     await dbConnect();
     console.log("hello")
     const cookieStore  = await cookies();
