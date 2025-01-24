@@ -1,9 +1,12 @@
 import dbConnect from "@/lib/dbConnect";
 import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import {  NextResponse } from "next/server";
 
-
-export async function GET(req:NextRequest,res:NextResponse<any>){
+interface ResponseData{
+    message:string;
+    success:boolean;
+}
+export async function GET(){
     try {
         await dbConnect();
         const cookieStore  = await cookies();

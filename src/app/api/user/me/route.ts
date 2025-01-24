@@ -1,9 +1,9 @@
 import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import userModel from "@/models/user.model";
 import dbConnect from "@/lib/dbConnect";
-export async function GET(req:NextRequest,res:NextResponse<any>){
+export async function GET(){
     await dbConnect();
     console.log("hello")
     const cookieStore  = await cookies();
