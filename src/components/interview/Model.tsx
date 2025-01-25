@@ -5,7 +5,8 @@ import toast from 'react-hot-toast';
 import { usePathname } from 'next/navigation';
 
 const Modal = ({ isOpen, closeModal }) => {
-  const [username, setUsername] = useState('kamlesh haha ha ');
+  const [username, setUsername] = useState<string>('kamlesh haha ha ');
+  const [roomId,setRoomId] = useState<string>("")
   const pathname =usePathname();
   const handleSave = () => {
     toast.success("save changes..")
@@ -13,7 +14,8 @@ const Modal = ({ isOpen, closeModal }) => {
   };
 
   useEffect(()=>{
-    console.log(pathname.split("/").at(-1)); 
+    const id = pathname.split("/").at(-1)
+    setRoomId(id)
   },[])
   if (!isOpen) return null; 
 
@@ -47,9 +49,10 @@ const Modal = ({ isOpen, closeModal }) => {
             <input
               type="text"
               id="interviewId"
-              
+              value={roomId}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm   bg-black text-white"
               placeholder="Enter interview ID"
+              readOnly
             />
           </div>
 
