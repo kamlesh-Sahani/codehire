@@ -5,10 +5,11 @@ import CodeEditor from "@/components/interview/CodeEditor";
 import EditorContainer from "@/components/interview/EditorContainer";
 import Modal from "@/components/interview/Model";
 import Performance from "@/components/interview/Performance";
+import TestContainer from "@/components/interview/TestContainer";
 import React, { useState } from "react";
 function InterviewPage() {
   const [screenType, setScreenType] = useState<
-    "canvas" | "editor"  | "performance"
+    "canvas" | "editor"  | "performance" | "test"
   >("canvas");
 
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -21,6 +22,10 @@ function InterviewPage() {
         <button className={`w-[140px] h-[40px] text-sm max-sm:w-[120px]    cursor-pointer hover:bg-[#1f1f1f94] border-2 border-b-2 border-[#272727] rounded-l-md font-semibold  ${screenType==="editor"?"bg-[#1f1f1f94]":""}`} onClick={()=>setScreenType("editor")}>
           Editor
         </button>
+        <button className={`w-[140px] h-[40px] text-sm max-sm:w-[120px]    cursor-pointer hover:bg-[#1f1f1f94]  border-t-2 border-b-2 border-l-[#272727]  border-t-[#272727] border-b-[#272727] font-semibold  ${screenType==="test"?"bg-[#1f1f1f94]":""}`} onClick={()=>setScreenType("test")}>
+          Test
+        </button>
+
         <button className={`w-[140px] h-[40px] text-sm max-sm:w-[120px]    cursor-pointer hover:bg-[#1f1f1f94]  border-t-2 border-b-2 border-l-[#272727]  border-t-[#272727] border-b-[#272727] font-semibold  ${screenType==="canvas"?"bg-[#1f1f1f94]":""}`} onClick={()=>setScreenType("canvas")}>
           Canvas
         </button>
@@ -32,7 +37,7 @@ function InterviewPage() {
       <div className="w-full bg-[#414141] h-[1px]"></div>
       <div className=" flex flex-1 w-full bg-black overflow-y-auto ">
         {
-          screenType==="canvas"?<Canvas />:screenType==="editor"?<EditorContainer />:<Performance />
+          screenType==="canvas"?<Canvas />:screenType==="editor"?<EditorContainer />:screenType==="test"?<TestContainer/>:<Performance />
         }
         
       </div>
