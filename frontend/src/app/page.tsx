@@ -22,7 +22,7 @@ export default function Home() {
           </h1>
           <Link href={`/interview/${interviewId}`}>
           <button className="bg-mainColor  text-black py-3 px-6 text-lg font-semibold drop-shadow-md  transition duration-300  h-[45px] w-[210px] text-[17px] rounded-xl  flex justify-center items-center gap-3 hover:shadow-mainColor/50  hover:shadow-lg cursor-pointer">
-            Try Now
+            Join Interview
           </button>
           </Link>
 
