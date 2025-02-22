@@ -18,9 +18,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   // Basic SEO
-  title: "CodeHire - Empowering Tech Talent",
+  title: "HireFlow AI - Empowering Tech Talent",
   description:
-    "CodeHire: The ultimate platform for technical interviews and skill evaluation.",
+    "HireFlow AI: The ultimate platform for technical interviews and skill evaluation.",
 
   // General
   applicationName: "CodeHire",
