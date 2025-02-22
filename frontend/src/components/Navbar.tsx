@@ -50,7 +50,7 @@ const Navbar = () => {
             <Gitlab className="text-2xl" />
           </div>
           <h1 className="font-semibold text-[25px]  bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
-            CodeHire
+            HireFlow AI
           </h1>
         </div>
       </Link>

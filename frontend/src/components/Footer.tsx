@@ -5,9 +5,9 @@ const Footer = () => {
     <footer className="w-full flex mt-32 justify-around items-center bg-[#030303] text-white py-8">
       <div className="flex flex-col gap-2">
         <button className="text-lg font-semibold bg-mainColor w-[140px] h-[40px] rounded-md">
-          Codehire
+          HireFlow AI
         </button>
-        <p>&copy; 2025 Codehire. All rights reserved.</p>
+        <p>&copy; 2025 HireFlow AI. All rights reserved.</p>
       </div>
 
       <div className="flex justify-center items-center space-x-6">

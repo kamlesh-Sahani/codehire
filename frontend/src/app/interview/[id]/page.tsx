@@ -7,9 +7,10 @@ import Modal from "@/components/interview/Model";
 import Performance from "@/components/interview/Performance";
 import TestContainer from "@/components/interview/TestContainer";
 import React, { useState } from "react";
+import Interview from "@/components/Interview";
 function InterviewPage() {
   const [screenType, setScreenType] = useState<
-    "canvas" | "editor"  | "performance" | "test"
+    "canvas" | "editor"  | "performance" | "test"|"interview"
   >("canvas");
 
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -32,12 +33,15 @@ function InterviewPage() {
         <button className={`w-[140px] h-[40px] text-sm max-sm:w-[120px] rounded-r-md cursor-pointer hover:bg-[#1f1f1f94] border-2 border-[#272727] font-semibold  ${screenType==="performance"?"bg-[#1f1f1f94]":""}`} onClick={()=>setScreenType("performance")}>
           Performance
         </button>
+        <button className={`w-[140px] h-[40px] text-sm max-sm:w-[120px] rounded-r-md cursor-pointer hover:bg-[#1f1f1f94] border-2 border-[#272727] font-semibold  ${screenType==="performance"?"bg-[#1f1f1f94]":""}`} onClick={()=>setScreenType("interview")}>
+          Live Interview
+        </button>
       </div>
 
       <div className="w-full bg-[#414141] h-[1px]"></div>
       <div className=" flex flex-1 w-full bg-black overflow-y-auto ">
         {
-          screenType==="canvas"?<Canvas />:screenType==="editor"?<EditorContainer />:screenType==="test"?<TestContainer/>:<Performance />
+          screenType==="canvas"?<Canvas />:screenType==="editor"?<EditorContainer />:screenType==="test"?<TestContainer/>:screenType==="interview"?<Interview/>:<Performance />
         }
         
       </div>

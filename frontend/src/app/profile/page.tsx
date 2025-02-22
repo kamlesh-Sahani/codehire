@@ -102,28 +102,28 @@ export default function Profile() {
 // Upcoming Interviews Data
 const interviews = [
   {
-    company: "Google",
+    company: "Software Developer",
     stage: "Technical Round",
     date: "2025-01-25",
     time: "15:00",
     status: "Upcoming"
   },
   {
-    company: "Amazon",
+    company: "Frontend Developer",
     stage: "HR Interview",
     date: "2025-01-27",
     time: "11:00",
     status: "Scheduled"
   },
   {
-    company: "Microsoft",
+    company: "Backend Developer",
     stage: "System Design",
     date: "2025-02-01",
     time: "14:30",
     status: "Pending Confirmation"
   },
   {
-    company: "Meta",
+    company: "Content Writing",
     stage: "Cultural Fit",
     date: "2025-02-05",
     time: "10:00",
@@ -134,35 +134,40 @@ const interviews = [
 // Recent Activities Data
 const activities = [
   {
-    candidate: "Sarah Johnson",
+    candidate: "Kamlesh Kumar",
     position: "Senior Frontend Developer",
     status: "Technical Review",
     lastUpdate: "2 hours ago"
   },
   {
-    candidate: "Michael Chen",
+    candidate: "Charanpreet Kaur",
     position: "Full Stack Engineer",
     status: "Offer Sent",
     lastUpdate: "1 day ago"
   },
   {
-    candidate: "Emma Wilson",
+    candidate: "Aman Khowal",
     position: "UX Engineer",
     status: "Interview Scheduled",
     lastUpdate: "3 days ago"
   },
   {
-    candidate: "David Kim",
+    candidate: "Saad Mehmood",
     position: "DevOps Specialist",
     status: "Reference Check",
     lastUpdate: "5 days ago"
   },
   {
-    candidate: "Lisa Rodriguez",
+    candidate: "Sonu Kumar",
     position: "Mobile Developer",
     status: "Rescreen Needed",
     lastUpdate: "1 week ago"
-  }
+  },  {
+    candidate: "Tahir Khan",
+    position: "DevOps Specialist",
+    status: "Reference Check",
+    lastUpdate: "5 days ago"
+  },
 ];
   return (
     // <div className="min-h-screen p-5 mt-20">
@@ -429,7 +434,8 @@ const activities = [
               <h2 className="text-xl font-bold text-white">
                 Upcoming Interviews
               </h2>
-              <button className="text-indigo-400 hover:text-indigo-300 flex items-center gap-2">
+              <button                 onClick={() => setShowScheduleInterview(true)}
+ className="text-indigo-400 hover:text-indigo-300 flex items-center gap-2">
                 <Plus className="w-5 h-5" />
                 Add New
               </button>
