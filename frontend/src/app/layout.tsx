@@ -79,7 +79,7 @@ export default function RootLayout({
         <Provider
         >
           <AuthProvider >
-          <div className="flex flex-col justify-between gap-10  min-h-screen">
+          <div className="flex flex-col justify-between gap-10  min-h-screen ">
             <Navbar></Navbar>
             <div className="flex-1">{children}</div>
             <Footer />

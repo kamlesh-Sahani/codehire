@@ -2,7 +2,7 @@ import React from "react";
 import { Linkedin } from "lucide-react";
 const Footer = () => {
   return (
-    <footer className="w-full flex  justify-around items-center bg-[#030303] text-white py-8">
+    <footer className="w-full flex mt-32 justify-around items-center bg-[#030303] text-white py-8">
       <div className="flex flex-col gap-2">
         <button className="text-lg font-semibold bg-mainColor w-[140px] h-[40px] rounded-md">
           Codehire
