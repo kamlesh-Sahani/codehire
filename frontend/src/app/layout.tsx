@@ -23,9 +23,9 @@ export const metadata: Metadata = {
     "HireFlow AI: The ultimate platform for technical interviews and skill evaluation.",
 
   // General
-  applicationName: "CodeHire",
+  applicationName: "HireFlow AI",
   keywords: [
-    "CodeHire",
+    "HireFlow AI",
     "technical interviews",
     "coding assessments",
     "developer hiring",
