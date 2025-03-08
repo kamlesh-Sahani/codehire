@@ -3,11 +3,14 @@ import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { usePathname } from 'next/navigation';
-
+import socketInit from '@/lib/socket';
+import { SocketContext } from '@/context/socketContext';
+import {useContext} from "react"
 const Modal = ({ isOpen, closeModal }) => {
   const [username, setUsername] = useState<string>('kamlesh haha ha ');
   const [roomId,setRoomId] = useState<string>("")
   const pathname =usePathname();
+  const {socketRef,setSocketRoomId} = useContext(SocketContext)
   const handleSave = () => {
     toast.success("save changes..")
     closeModal(); 
@@ -17,6 +20,10 @@ const Modal = ({ isOpen, closeModal }) => {
     const id = pathname.split("/").at(-1)
     setRoomId(id)
   },[])
+
+  useEffect(()=>{
+    setSocketRoomId(roomId)
+  },[roomId])
   if (!isOpen) return null; 
 
   return (

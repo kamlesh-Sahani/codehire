@@ -4,6 +4,7 @@ export interface EditorType extends  Document{
     ownerId:mongoose.ObjectId;
     content:string;
     isDeleted:boolean;
+    roomId:string;
 
 }
 const editorSchema = new mongoose.Schema<EditorType>({
@@ -19,6 +20,10 @@ const editorSchema = new mongoose.Schema<EditorType>({
     isDeleted:{
         type:Boolean,
         default:false
+    },
+    roomId:{
+        type:String,
+        default:""
     }
 },{timestamps:true});
 

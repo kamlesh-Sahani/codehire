@@ -3,25 +3,28 @@ import {
   ReactNode,
   SetStateAction,
   createContext,
+  useEffect,
   useState,
+  useContext,
 } from "react";
+import { SocketContext } from "./socketContext";
+import { Socket } from "node:dgram";
 
 interface EditorContextType {
   language: string;
   defaultCode: string;
   setLanguage: Dispatch<SetStateAction<string>>;
   setDefaultCode: Dispatch<SetStateAction<string>>;
-  codeContent:string;
-  setCodeContent:Dispatch<SetStateAction<string>>;
-
+  codeContent: string;
+  setCodeContent: Dispatch<SetStateAction<string>>;
 }
 export const EditorContext = createContext<EditorContextType>({
   language: "javascript",
   defaultCode: "console.log('hello world')",
   setDefaultCode: () => {},
   setLanguage: () => {},
-  codeContent:"",
-  setCodeContent:()=>{}
+  codeContent: "",
+  setCodeContent: () => {},
 });
 
 const EditorProvider = ({ children }: { children: ReactNode }) => {
@@ -29,10 +32,58 @@ const EditorProvider = ({ children }: { children: ReactNode }) => {
   const [defaultCode, setDefaultCode] = useState<string>(
     "console.log('hello world')"
   );
-  const [codeContent,setCodeContent] = useState<string>("");
+  const { socketRef, socketRoomId } = useContext(SocketContext);
+  const [codeContent, setCodeContent] = useState<string>("");
+
+
+  useEffect(() => {
+    const socket = socketRef?.current;
+    if (!socket) return;
+    console.log(socket,"scoker")
+
+    socket.emit("joinInterview", socketRoomId);
+
+    const handleLoadCode = (code: string) => {
+      console.log("[LOAD CODE] Received:", code);
+      setCodeContent((prev) => (prev !== code ? code : prev));
+    };
+
+    const handleCodeUpdate = (code: string) => {
+      console.log("[CODE UPDATE] Received:", code);
+      setCodeContent((prev) => (prev !== code ? code : prev));
+    };
+
+    socket.on("loadCode", handleLoadCode);
+    socket.on("codeUpdate", handleCodeUpdate);
+
+    return () => {
+      socket.off("loadCode", handleLoadCode);
+      socket.off("codeUpdate", handleCodeUpdate);
+    };
+  }, [socketRef, socketRoomId]);
+
+
+
+
+  useEffect(() => {
+    const socket = socketRef?.current;
+    if (socket) {
+      socket.emit("changeCode", {
+        roomId: socketRoomId,
+        code: codeContent,
+      });
+    }
+  }, [codeContent, socketRef]);
   return (
     <EditorContext.Provider
-      value={{ language, defaultCode, setLanguage, setDefaultCode,codeContent,setCodeContent }}
+      value={{
+        language,
+        defaultCode,
+        setLanguage,
+        setDefaultCode,
+        codeContent,
+        setCodeContent,
+      }}
     >
       {children}
     </EditorContext.Provider>

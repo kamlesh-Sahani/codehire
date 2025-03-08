@@ -6,12 +6,12 @@ import Link from "next/link";
 import { BackgroundLines } from "@/components/ui/backgroud-line";
 import { useEffect, useState } from "react";
 import {v4 as uuid } from  "uuid"
-
 export default function Home() {
   const [interviewId, setInterviewId] = useState('');
   useEffect(()=>{
     const id = uuid();
     setInterviewId(id);
+    
   },[])
   return (
     <BackgroundLines className="m-auto   max-lg:p-5 max-lg:w-full lg:w-[90%] xl:w-[80%] ">

@@ -6,16 +6,21 @@ import EditorContainer from "@/components/interview/EditorContainer";
 import Modal from "@/components/interview/Model";
 import Performance from "@/components/interview/Performance";
 import TestContainer from "@/components/interview/TestContainer";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Interview from "@/components/Interview";
+
+import { usePathname } from "next/navigation";
 function InterviewPage() {
   const [screenType, setScreenType] = useState<
     "canvas" | "editor"  | "performance" | "test"|"interview"
   >("canvas");
+  const pathname = usePathname();
 
   const [isModalOpen, setIsModalOpen] = useState(true);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  console.log(pathname,"pathname")
   return (
     <div className="flex flex-col w-full justify-center items-center px-6 pt-20 gap-2  text-white h-screen">
       <div className="flex justify-center  items-center">

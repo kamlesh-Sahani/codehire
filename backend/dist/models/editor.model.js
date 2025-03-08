@@ -12,6 +12,10 @@ const editorSchema = new mongoose.Schema({
     isDeleted: {
         type: Boolean,
         default: false
+    },
+    roomId: {
+        type: String,
+        default: ""
     }
 }, { timestamps: true });
 editorSchema.index({ ownerId: 1 });
