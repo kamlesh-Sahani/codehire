@@ -31,6 +31,7 @@ import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { AuthContext } from "@/context/authContext";
 import ScheduleInterview from "@/components/ScheduleInterview";
 import ShortListedCandidates from "@/components/ShortlistCandidate";
+import InterviewInviteDialog from "@/components/ScheduleInterview";
 // Register Chart.js components
 ChartJS.register(
   LineElement,
@@ -43,6 +44,17 @@ ChartJS.register(
 );
 
 export default function Profile() {
+
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleSendEmails = (data: any) => {
+    console.log("Sending Emails:", data);
+    // Call your backend API here to send emails (e.g., using Nodemailer)
+  };
+
+
+
   const { user, logoutHandler } = useContext(AuthContext);
   const [userData] = useState({
     name: "Kamlesh Sahani",
@@ -170,100 +182,7 @@ const activities = [
   },
 ];
   return (
-    // <div className="min-h-screen p-5 mt-20">
-    //   <div className="max-w-6xl mx-auto shadow-lg rounded-lg overflow-hidden">
-    //     {/* Header Section */}
-    //     <div className="p-6 flex items-center justify-between gap-5 border-b max-sm:flex-col">
-    //       <div className="w-full flex gap-3">
-    //         <Avatar className="rounded-full border-4 border-indigo-500 shadow-lg w-[100px] h-[100px]">
-    //           <AvatarImage src="https://github.com/shadcn.png" />
-    //           <AvatarFallback>{user?.name}</AvatarFallback>
-    //         </Avatar>
-    //         <div>
-    //           <h1 className="text-2xl font-bold text-white">{user?.name}</h1>
-    //           <p className="text-gray-300">{user?.email}</p>
-    //           <p className="text-gray-400">Role: {userData.role}</p>
-    //           <p className="text-gray-400">
-    //             Experience: {userData.experience} years
-    //           </p>
-    //         </div>
-    //       </div>
 
-    //       <div className="flex gap-3">
-    //         <button
-    //           className="bg-green-500 text-white cursor-pointer w-[160px] h-[40px] rounded font-semibold hover:bg-green-600"
-    //           onClick={() => setShowScheduleInterview(true)}
-    //         >
-    //           Schedule Interview
-    //         </button>
-    //         <button
-    //           className="bg-blue-500 text-white cursor-pointer w-[200px] h-[40px] rounded font-semibold hover:bg-blue-600"
-    //           onClick={() => setShowShortlistedCandidates(true)}
-    //         >
-    //           Shortlisted Candidates
-    //         </button>
-    //         <button
-    //           className="bg-mainColor text-black cursor-pointer w-[130px] h-[40px] rounded font-semibold hover:bg-mainColor/50"
-    //           onClick={logoutHandler}
-    //         >
-    //           Logout
-    //         </button>
-    //       </div>
-    //     </div>
-    //     {showScheduleInterview && (
-    //       <ScheduleInterview onClose={() => setShowScheduleInterview(false)} />
-    //     )}
-    //     {showShortlistedCandidates && (
-    //       <ShortListedCandidates
-    //         onClose={() => setShowShortlistedCandidates(false)}
-    //       />
-    //     )}
-    //     {/* Stats Section */}
-    //     <div className="grid grid-cols-3 gap-5 p-6">
-    //       <div className="bg-indigo-100 text-indigo-800 p-4 rounded-lg text-center shadow-sm">
-    //         <h2 className="text-lg font-semibold">Sessions Attended</h2>
-    //         <p className="text-3xl font-bold">{statsData.sessionsAttended}</p>
-    //       </div>
-    //       <div className="bg-green-100 text-green-800 p-4 rounded-lg text-center shadow-sm">
-    //         <h2 className="text-lg font-semibold">Rounds Completed</h2>
-    //         <p className="text-3xl font-bold">{statsData.roundsCompleted}</p>
-    //       </div>
-    //       <div className="bg-yellow-100 text-yellow-800 p-4 rounded-lg text-center shadow-sm">
-    //         <h2 className="text-lg font-semibold">Pending Interviews</h2>
-    //         <p className="text-3xl font-bold">{statsData.pendingInterviews}</p>
-    //       </div>
-    //     </div>
-
-    //     {/* Graph Section */}
-    //     <div className="p-6">
-    //       <h2 className="text-xl font-bold text-white mb-4">Interviews</h2>
-    //       <div className="bg-gray-900 p-6 rounded-lg shadow-sm">
-    //         <Line data={lineChartData} options={lineChartOptions as any} />
-    //       </div>
-    //     </div>
-
-    //     {/* Upcoming Interviews Section */}
-    //     <div className="p-6">
-    //       <h2 className="text-xl font-bold text-white mb-4">
-    //         Upcoming Interviews
-    //       </h2>
-    //       <ul className="space-y-4">
-    //         <li className="flex justify-between p-4 bg-gray-900 rounded-lg shadow-sm">
-    //           <span className="font-medium text-gray-400">
-    //             Google - Technical Round
-    //           </span>
-    //           <span className="text-gray-500">Jan 25, 2025 | 3:00 PM</span>
-    //         </li>
-    //         <li className="flex justify-between p-4 bg-gray-900 rounded-lg shadow-sm">
-    //           <span className="font-medium text-gray-400">
-    //             Amazon - HR Round
-    //           </span>
-    //           <span className="text-gray-500">Jan 27, 2025 | 11:00 AM</span>
-    //         </li>
-    //       </ul>
-    //     </div>
-    //   </div>
-    // </div>
     <div className="min-h-screen p-5 mt-20 bg-gray-900">
       <div className="max-w-6xl mx-auto shadow-2xl rounded-xl overflow-hidden bg-gray-800">
         {/* Header Section */}
@@ -300,7 +219,7 @@ const activities = [
             <div className="flex gap-3">
               <button
                 className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition-colors flex items-center gap-2"
-                onClick={() => setShowScheduleInterview(true)}
+                onClick={() => setIsDialogOpen(true)}
               >
                 <Calendar className="w-5 h-5" />
                 Schedule Interview
@@ -535,9 +454,11 @@ const activities = [
       </div>
 
       {/* Modals */}
-      {showScheduleInterview && (
-        <ScheduleInterview onClose={() => setShowScheduleInterview(false)} />
-      )}
+      <InterviewInviteDialog
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+        onSend={handleSendEmails}
+      />
       {showShortlistedCandidates && (
         <ShortListedCandidates
           onClose={() => setShowShortlistedCandidates(false)}

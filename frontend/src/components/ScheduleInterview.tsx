@@ -1,121 +1,195 @@
 import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectItem,
+  SelectTrigger,
+  SelectContent,
+  SelectValue,
+} from "@/components/ui/select";
 
-const ScheduleInterview = ({ onClose }: { onClose: () => void }) => {
-  const [candidateName, setCandidateName] = useState("");
-  const [candidateEmail, setCandidateEmail] = useState("");
-  const [position, setPosition] = useState("");
-  const [date, setDate] = useState("");
+import {v4 as uuid } from  "uuid"
+import api from "@/lib/api";
+import toast from "react-hot-toast"
+
+const InterviewInviteDialog = ({ isOpen, onClose, onSend }) => {
+  const [emailList, setEmailList] = useState("");
+  const [date, setDate] = useState(new Date());
   const [time, setTime] = useState("");
-  const [mode, setMode] = useState("Online");
+  const [mode, setMode] = useState("online");
+  const [message, setMessage] = useState(
+    "Dear candidate, you are invited for an interview..."
+  );
+  const [subject,setSubject] = useState<string>("");
+  const [title,setTitile] = useState<string>("");
+  const [loading,setLoading] = useState<boolean>(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log({ candidateName, position, date, time, mode });
-    alert("Interview Scheduled Successfully!");
-    onClose();
+
+  const handleSchedule = async() => {
+    try{
+      setLoading(true);
+      const emails = emailList.split(",").map((email) => email.trim());
+      const roomId = uuid();
+      const newSchedule = {
+        title,
+        date,
+        time,
+        mode,
+        mailMessage:message,
+        intervieweeEmails:emails,
+        mailSubject:subject,
+        roomId
+      }
+
+
+      const {data} = await api.post("/interview/new",newSchedule);
+      console.log(data,"res")
+
+      if(data.success){
+        toast.success(data.message || "schedule is created");
+        onClose();
+      }else{
+        toast.error(data.message || "failed to create")
+      }
+    }catch(error:any){
+      console.log(error,"error")
+      toast.error(error?.response?.data?.message || "failed to create")
+    }finally{
+      setLoading(false);
+    }
+   
+    // onClose();
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50 p-5">
-      <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl text-gray-400 font-bold mb-4 text-center">
-          Schedule Interview
-        </h2>
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="bg-gray-900 text-white border-gray-700 rounded-xl p-6 overflow-y-auto max-h-[90vh]">
+        <DialogHeader>
+          <DialogTitle className="text-xl font-semibold">
+            Send Interview Invitation
+          </DialogTitle>
+        </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-4">
+          {/* Email Input */}
           <div>
-            {/* <label className="block text-gray-700">Candidate Name:</label> */}
-            <input
+            <Label>Title</Label>
+            <Input
               type="text"
-              className="w-full text-white text-sm border p-3 rounded"
-              value={candidateName}
-              placeholder="Enter Candidate's Name"
-              onChange={(e) => setCandidateName(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            {/* <label className="block text-gray-700">Candidate Email:</label> */}
-            <input
-              type="email"
-             className="w-full text-white text-sm border p-3 rounded"
-             placeholder="Enter Candidate's Email"
-              value={candidateEmail}
-              onChange={(e) => setCandidateEmail(e.target.value)}
-              required
+              placeholder="Frontend Developer"
+              value={title}
+              onChange={(e) => setTitile(e.target.value)}
+              className="bg-gray-800 border-gray-600 text-white"
             />
           </div>
 
           <div>
-            {/* <label className="block text-gray-700">Position:</label> */}
-            <select
-              className="w-full text-white border text-sm p-2 rounded"
-              value={position}
-              onChange={(e) => setPosition(e.target.value)}
-              required
-            >
-              <option value="">Select Position</option>
-              <option value="Frontend Developer">Frontend Developer</option>
-              <option value="Backend Developer">Backend Developer</option>
-              <option value="Full Stack Developer">Full Stack Developer</option>
-              <option value="Data Scientist">Data Scientist</option>
-            </select>
+            <Label>Email Addresses (comma separated)</Label>
+            <Input
+              type="text"
+              placeholder="Enter candidate emails"
+              value={emailList}
+              onChange={(e) => setEmailList(e.target.value)}
+              className="bg-gray-800 border-gray-600 text-white"
+            />
           </div>
-
           <div>
-            <label className="block text-gray-300">Interview Date:</label>
-            <input
-              type="date"
-              className="w-full text-sm text-white border p-2 rounded"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              required
+            <Label>Email Subject</Label>
+            <Input
+              type="text"
+              placeholder="You are selected to round 2 (machine coding round)"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              className="bg-gray-800 border-gray-600 text-white"
             />
           </div>
 
+          {/* Date Picker */}
+          <div className="flex flex-col gap-2">
+            <Label>Interview Date</Label>
+            <DatePicker
+              selected={date}
+              onChange={(selectedDate: Date | null) => {
+                if (selectedDate) setDate(selectedDate);
+              }}
+              dateFormat="yyyy-MM-dd"
+              showYearDropdown
+              scrollableYearDropdown
+              yearDropdownItemNumber={50}
+              className="bg-gray-800 border-gray-600 text-white w-full px-3 py-2 rounded-md"
+            />
+          </div>
+
+          {/* Time Picker */}
           <div>
-            <label className="block text-gray-300">Interview Time:</label>
-            <input
+            <Label>Interview Time</Label>
+            <Input
               type="time"
-              className="w-full text-sm text-white border p-2 rounded"
               value={time}
               onChange={(e) => setTime(e.target.value)}
-              required
+              className="bg-gray-800 border-gray-600 text-white"
             />
           </div>
 
+          {/* Mode Selection */}
           <div>
-            <label className="block text-gray-300">Interview Mode:</label>
-            <select
-              className="w-full text-sm text-white border p-2 rounded"
-              value={mode}
-              onChange={(e) => setMode(e.target.value)}
-              required
-            >
-              <option value="Online">Online</option>
-              <option value="Offline">Offline</option>
-            </select>
+            <Label>Mode</Label>
+            <Select value={mode} onValueChange={(value) => setMode(value)}>
+              <SelectTrigger className="bg-gray-800 border-gray-600 text-white">
+                <SelectValue placeholder="Select mode" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="online">Online</SelectItem>
+                <SelectItem value="offline">Offline</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
-          <div className="flex justify-end gap-3">
-            <button
-              type="button"
-              className="bg-gray-400 px-4 py-2 rounded"
-              onClick={onClose}
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="bg-green-500 text-white px-4 py-2 rounded"
-            >
-              Schedule Interview
-            </button>
+          {/* Custom Message */}
+          <div>
+            <Label>Custom Message</Label>
+            <Textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="bg-gray-800 border-gray-600 text-white"
+            />
           </div>
-        </form>
-      </div>
-    </div>
+        </div>
+
+        {/* Buttons */}
+        <DialogFooter>
+          <Button
+            variant="outline"
+            onClick={onClose}
+            className="border-gray-600 text-gray-300"
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleSchedule}
+            className="bg-blue-600 hover:bg-blue-700 text-white"
+          >
+            {
+              loading?"sending...":"Send Invitation"
+            }
+           
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 
-export default ScheduleInterview;
+export default InterviewInviteDialog;

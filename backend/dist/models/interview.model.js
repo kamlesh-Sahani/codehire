@@ -9,9 +9,8 @@ const interviewSchema = new mongoose.Schema({
         ref: "user",
         required: [true, "Please specify the interviewer"],
     },
-    intervieweeId: [{
-            type: Schema.Types.ObjectId,
-            ref: "user",
+    intervieweeEmails: [{
+            type: String,
         }],
     canvasId: {
         type: Schema.Types.ObjectId,
@@ -25,6 +24,28 @@ const interviewSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: "performance",
     },
+    date: {
+        type: String,
+        required: [true, 'please enter the date of interview']
+    },
+    time: {
+        type: String,
+        required: [true, 'please enter the time of interview']
+    },
+    mode: {
+        type: String,
+        required: [true, 'please enter the mode of interview'],
+        enum: ["online", "offline"]
+    },
+    mailMessage: {
+        type: String,
+        required: [true, 'please enter the mail of interview']
+    },
+    roomId: {
+        type: String,
+        required: [true, "please enter the roomid"],
+        unique: true
+    }
 }, { timestamps: true });
 interviewSchema.index({ interviewerId: 1 });
 const interviewModel = mongoose?.models?.interview || mongoose.model("interview", interviewSchema);
