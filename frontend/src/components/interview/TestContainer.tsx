@@ -253,15 +253,15 @@ export default function TestContainer() {
                       <input
                         type="text"
                         placeholder="Enter an option"
-                        onKeyPress={(e) => {
-                          if (e.key === "Enter" && e.target.value) {
-                            setNewQuestion({
-                              ...newQuestion,
-                              options: [...newQuestion.options, e.target.value],
-                            });
-                            e.target.value = "";
-                          }
-                        }}
+                        // onKeyPress={(e:any) => {
+                        //   if (e.key === "Enter" && e.target.value) {
+                        //     setNewQuestion({
+                        //       ...newQuestion,
+                        //       options: [...newQuestion.options, e.target.value],
+                        //     });
+                        //     e.target.value = "";
+                        //   }
+                        // }}
                         className="w-full p-2 bg-gray-700 rounded-lg"
                       />
                       <ul className="mt-2 space-y-2">
