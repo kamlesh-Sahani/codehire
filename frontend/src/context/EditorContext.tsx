@@ -39,7 +39,6 @@ const EditorProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const socket = socketRef?.current;
     if (!socket) return;
-    console.log(socket,"scoker")
 
     socket.emit("joinInterview", socketRoomId);
 
@@ -49,6 +48,7 @@ const EditorProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const handleCodeUpdate = (code: string) => {
+      console.count(code)
       console.log("[CODE UPDATE] Received:", code);
       setCodeContent((prev) => (prev !== code ? code : prev));
     };
@@ -60,20 +60,23 @@ const EditorProvider = ({ children }: { children: ReactNode }) => {
       socket.off("loadCode", handleLoadCode);
       socket.off("codeUpdate", handleCodeUpdate);
     };
-  }, [socketRef, socketRoomId]);
+  }, [socketRoomId]);
 
 
 
 
   useEffect(() => {
     const socket = socketRef?.current;
-    if (socket) {
-      socket.emit("changeCode", {
-        roomId: socketRoomId,
-        code: codeContent,
-      });
+
+    console.count("kamlesh count");
+    if (socket && codeContent !== defaultCode) {
+        socket.emit("changeCode", {
+            roomId: socketRoomId,
+            code: codeContent,
+        });
     }
-  }, [codeContent, socketRef]);
+}, [codeContent, socketRoomId, defaultCode]);
+
   return (
     <EditorContext.Provider
       value={{

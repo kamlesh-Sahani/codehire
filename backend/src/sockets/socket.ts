@@ -30,7 +30,7 @@ const socketInit = (server:httpServer)=>{
         socket.on("changeCode",async({roomId,code})=>{
             console.log(roomId,code,"code")
 
-            socket.to(roomId).emit("codeUpdate",code);
+            socket.in(roomId).emit("codeUpdate",code);
             const editor = await editorModel.findOne({roomId});
             if(editor){
                 editor.content=code;
