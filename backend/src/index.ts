@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import dbConnect from './utils/dbConnect.js';
 import userRouter from './routes/user.route.js';
 import interviewRouter from "./routes/interview.route.js";
+import errorMiddleware from './middlewares/error.middleware.js';
 // env variables
 const PORT = process.env.PORT || 2001;
 const FRONTEND_URL = process.env.FRONTEND_URL!;
@@ -43,6 +44,9 @@ app.get("/",(req,res)=>{
 
 app.use("/api/v1/user",userRouter);
 app.use("/api/v1/interview",interviewRouter);
+
+
+app.use(errorMiddleware);
 
 server.listen(PORT,()=>{
     console.log(`server is running on: localhost:${PORT}`);

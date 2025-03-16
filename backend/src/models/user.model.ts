@@ -9,6 +9,7 @@ export interface UserType extends Document{
     isDeleted:boolean;
     comparePassword:(password:string)=>Promise<boolean>;
     generateToken:()=>string;
+    isActive:boolean;
 } 
 
 const userSchema  = new mongoose.Schema<UserType>({
@@ -30,6 +31,10 @@ const userSchema  = new mongoose.Schema<UserType>({
         minlength:[6,"password must be atleast 6 charater"]
     },
     isDeleted:{
+        type:Boolean,
+        default:false
+    },
+    isActive:{
         type:Boolean,
         default:false
     }
